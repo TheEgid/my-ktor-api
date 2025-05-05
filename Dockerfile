@@ -17,7 +17,7 @@ WORKDIR /app
 
 # Копируем JAR и конфиги
 COPY --from=builder /app/build/libs/*-all.jar app.jar
-COPY --from=builder /app/resources ./resources
+# COPY --from=builder /app/resources ./resources
 
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
