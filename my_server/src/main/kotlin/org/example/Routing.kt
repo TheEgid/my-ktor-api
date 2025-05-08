@@ -9,5 +9,8 @@ fun Application.configureRouting() {
         get("/") {
             call.respondText("777 Привет World!")
         }
+        get("/api/healthcheck") {
+            call.respondText("ok")
+        }
     }
 }
