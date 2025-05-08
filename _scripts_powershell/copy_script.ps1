@@ -1,24 +1,28 @@
 $start = Get-Date
 
-$scriptPath = $script:MyInvocation.MyCommand.Path
-$scriptParentDirectory = Split-Path $scriptPath -Parent
-$scriptGrandParentDirectory = Split-Path $scriptParentDirectory -Parent
-$folderName = Split-Path $scriptGrandParentDirectory -Leaf
+$scriptPath = $MyInvocation.MyCommand.Path
+$scriptDir = Split-Path $scriptPath -Parent
+$projectRoot = Split-Path $scriptDir -Parent
+$projectName = Split-Path $projectRoot -Leaf
 
-$src = $scriptGrandParentDirectory + "\"
-$dst = [Environment]::GetFolderPath("Desktop") + "\" + $folderName + "\"
+$src = "$projectRoot\"
+$dst = [Environment]::GetFolderPath("Desktop") + "\" + $projectName + "\"
 
-$esx1 = $src + ".repomix"
-$esx2 = $src + ".git"
-$esx3 = $src + "kotlin-api\app\build"
-$esx4 = $src + "kotlin-api\.gradle"
-$esx5 = $src + ".gradle"
-$esx6 = $src + "kotlin-api\.kotlin"
+$excludeDirs = @(
+    ".repomix",
+    ".git",
+    "server\app\build",
+    "server\.gradle",
+    ".gradle",
+    "server\.kotlin",
+    "server\bin",
+    "server\build"
+)
 
-robocopy $src $dst /MT:12 /MIR /XA:SH /XD $esx1 /XD $esx2 /XD $esx3 /XD $esx4 /XD $esx5 /XD $esx6 /XJD /NFL /NDL
+$excludeArgs = $excludeDirs | ForEach-Object { "/XD", "$src$_" }
 
-$end = Get-Date
-$elapsed = $end - $start
-Write-Output $dst, "Script execution time: $($elapsed.TotalSeconds) seconds"
+robocopy $src $dst /MT:12 /MIR /XA:SH $excludeArgs /XJD /NFL /NDL
 
-# Get-ChildItem -Recurse -Depth 10 | Select-Object FullName | Out-File -FilePath output.txt
+$elapsed = (Get-Date) - $start
+Write-Output "$dst"
+Write-Output "Script execution time: $($elapsed.TotalSeconds) seconds"
