@@ -4,9 +4,9 @@ FROM gradle:8.4.0-jdk17-alpine AS build
 
 WORKDIR /app
 
-COPY server/build.gradle.kts server/settings.gradle.kts server/gradle.properties ./
-COPY server/gradle ./gradle
-COPY server/src ./src
+COPY my_server/build.gradle.kts my_server/settings.gradle.kts my_server/gradle.properties ./
+COPY my_server/gradle ./gradle
+COPY my_server/src ./src
 
 RUN gradle buildFatJar --no-daemon
 

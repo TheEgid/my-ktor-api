@@ -1,4 +1,4 @@
-// server/.vscode/settings.json
+
 {
     "kotlin.languageServer.path": "gradlew", // через wrapper
     "kotlin.languageServer.enabled": true,

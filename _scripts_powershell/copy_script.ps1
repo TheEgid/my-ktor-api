@@ -11,12 +11,12 @@ $dst = [Environment]::GetFolderPath("Desktop") + "\" + $projectName + "\"
 $excludeDirs = @(
     ".repomix",
     ".git",
-    "server\app\build",
-    "server\.gradle",
+    "my_server\app\build",
+    "my_server\.gradle",
     ".gradle",
-    "server\.kotlin",
-    "server\bin",
-    "server\build"
+    "my_server\.kotlin",
+    "my_server\bin",
+    "my_server\build"
 )
 
 $excludeArgs = $excludeDirs | ForEach-Object { "/XD", "$src$_" }
