@@ -6,7 +6,7 @@ import io.ktor.server.routing.*
 import io.ktor.http.*
 
 fun Route.rootRoutes() {
-    get("/") {
-        call.respondText("777 Привет World!", ContentType.Text.Plain)
+    get("/") { // Явная обработка /api/
+        call.respondText("API Root with slash", ContentType.Text.Plain)
     }
 }
