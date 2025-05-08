@@ -1,4 +1,3 @@
-version: "3.8"
 
 services:
   my_server:
@@ -14,7 +13,7 @@ services:
     environment:
       TZ: "Europe/Moscow"
     # healthcheck:
-    #   test: ["CMD", "curl", "127.0.0.1:3007/api/healthcheck"]
+    #   test: ["CMD", "curl", "127.0.0.1:80/api/healthcheck"]
     #   interval: 5s
     #   timeout: 3s
     #   retries: 2
