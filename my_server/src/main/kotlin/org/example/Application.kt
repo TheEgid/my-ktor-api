@@ -14,6 +14,7 @@ class InvalidNameException : GreetingException("Invalid name format. Only letter
 class UnsupportedLanguageException(lang: String) : GreetingException("Unsupported language: $lang")
 
 fun Application.module() {
+    configureFrameworks()
     configureHTTP()
     configureSerialization()
     configureStatusPages()

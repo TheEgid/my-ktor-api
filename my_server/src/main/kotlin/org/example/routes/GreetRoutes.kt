@@ -70,6 +70,7 @@ private fun generateGreeting(name: String, lang: String): String {
         "en" -> listOf("Hello", "Hi", "Welcome")
         else -> throw UnsupportedLanguageException(lang)
     }
+    println("name: $name, lang: $lang")
     return "${greetings.random()}, $name!"
 }
 

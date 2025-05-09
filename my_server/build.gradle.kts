@@ -13,14 +13,18 @@ repositories {
     mavenCentral()
 }
 
+
 dependencies {
     implementation("io.ktor:ktor-server-core-jvm:3.0.1")
     implementation("io.ktor:ktor-server-content-negotiation-jvm:3.0.1")
     implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:3.0.1")
     implementation("io.ktor:ktor-server-netty-jvm:3.0.1")
     implementation("io.ktor:ktor-server-status-pages-jvm:3.0.1")
-    implementation("ch.qos.logback:logback-classic:1.4.14")
+
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
+    implementation("io.insert-koin:koin-ktor:3.5.3")
+
+    // Koin
     implementation("io.insert-koin:koin-ktor:3.5.3")
     implementation("io.insert-koin:koin-logger-slf4j:3.5.3")
 
@@ -30,6 +34,11 @@ dependencies {
 
     testImplementation("io.ktor:ktor-server-tests-jvm:3.0.1")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:2.0.21")
+
+    implementation("org.apache.logging.log4j:log4j-api:2.20.0")
+    implementation("org.apache.logging.log4j:log4j-core:2.20.0")
+    implementation("org.apache.logging.log4j:log4j-slf4j2-impl:2.20.0")
+    implementation("io.ktor:ktor-server-call-logging-jvm:3.0.1")
 }
 
 application {
