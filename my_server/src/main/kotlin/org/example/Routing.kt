@@ -15,7 +15,8 @@ fun Application.configureRouting() {
         route("/api") {
             rootRoutes()
             healthRoutes()
-            jsonRoutes()
+            helloRoutes()
+            greetRoutes()
         }
     }
 }
