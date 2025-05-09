@@ -13,7 +13,6 @@ import org.slf4j.event.Level
 fun Application.configureFrameworks() {
     install(Koin) {
         slf4jLogger()
-        // modules(module {})
     }
 
     install(CallLogging) {
