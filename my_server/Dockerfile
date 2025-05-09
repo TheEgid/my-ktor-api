@@ -3,38 +3,36 @@ FROM gradle:8.4.0-jdk17-alpine AS build
 
 WORKDIR /app
 
-# Копируем сначала файлы конфигурации для лучшего использования кэша Docker
+# Копируем конфигурационные файлы отдельно — для лучшего кэширования
 COPY build.gradle.kts settings.gradle.kts gradle.properties ./
 COPY gradle gradle
 
-# Устанавливаем правильные права для пользователя gradle
+# Устанавливаем правильные права
 RUN mkdir -p /home/gradle/.gradle && \
     chown -R gradle:gradle /home/gradle && \
     chown -R gradle:gradle /app
 
-# Переключаемся на пользователя gradle (не root)
 USER gradle
 
-# Скачиваем зависимости (кешируемый слой)
-RUN gradle dependencies --no-daemon
+# Скачиваем зависимости
+RUN gradle dependencies --no-daemon --configuration-cache
 
 # Копируем исходный код
-COPY src src
+COPY --chown=gradle:gradle src src
+# COPY --chown=gradle:gradle resources resources
 
-# Собираем fat JAR с дополнительными параметрами памяти
+# Сборка fat JAR
 RUN gradle buildFatJar --no-daemon --stacktrace \
-    -Dorg.gradle.jvmargs="-Xmx2048m -XX:MaxMetaspaceSize=512m" \
-    -Dorg.gradle.daemon=false
+    --configuration-cache \
+    -Dorg.gradle.jvmargs="-Xmx2048m -XX:MaxMetaspaceSize=512m"
 
 # Этап выполнения
 FROM eclipse-temurin:17-jre-jammy
 
 WORKDIR /app
 
-# Копируем собранный JAR (используем wildcard на случай, если имя файла отличается)
 COPY --from=build /app/build/libs/*.jar app.jar
 
-# Настройки безопасности и производительности JVM
 ENV JAVA_OPTS="-XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0 -XX:+HeapDumpOnOutOfMemoryError"
 
 EXPOSE 8080
