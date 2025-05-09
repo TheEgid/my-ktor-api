@@ -6,7 +6,7 @@ import org.example.routes.*
 
 fun Application.configureRouting() {
     routing {
-        route("/api") {
+        route("api") {
             healthRoutes()
             helloRoutes()
             greetRoutes()

@@ -6,7 +6,7 @@ import io.ktor.server.routing.*
 import io.ktor.http.*
 
 fun Route.healthRoutes() {
-    get("/healthcheck") {
+    get("healthcheck") {
         call.respondText("ok", ContentType.Text.Plain)
     }
 }
