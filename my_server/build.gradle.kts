@@ -14,26 +14,21 @@ repositories {
 }
 
 dependencies {
-    // Ktor Core
-    implementation("io.ktor:ktor-server-core-jvm")
-    implementation("io.ktor:ktor-server-content-negotiation-jvm")
-    implementation("io.ktor:ktor-serialization-kotlinx-json-jvm")
-    implementation("io.ktor:ktor-server-cors-jvm")
-    implementation("io.ktor:ktor-server-forwarded-header-jvm")
-    implementation("io.ktor:ktor-server-default-headers-jvm")
-    implementation("io.ktor:ktor-server-netty-jvm")
-    implementation("io.ktor:ktor-server-config-yaml-jvm")
-
-    // DI
+    implementation("io.ktor:ktor-server-core-jvm:3.0.1")
+    implementation("io.ktor:ktor-server-content-negotiation-jvm:3.0.1")
+    implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:3.0.1")
+    implementation("io.ktor:ktor-server-netty-jvm:3.0.1")
+    implementation("io.ktor:ktor-server-status-pages-jvm:3.0.1")
+    implementation("ch.qos.logback:logback-classic:1.4.14")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
     implementation("io.insert-koin:koin-ktor:3.5.3")
     implementation("io.insert-koin:koin-logger-slf4j:3.5.3")
 
-    // Logging
-    implementation("ch.qos.logback:logback-classic:1.4.14")
-    implementation("io.ktor:ktor-server-call-logging-jvm")
+    implementation("io.ktor:ktor-server-cors-jvm:3.0.1")
+    implementation("io.ktor:ktor-server-forwarded-header-jvm:3.0.1")
+    implementation("io.ktor:ktor-server-default-headers-jvm:3.0.1")
 
-    // Test
-    testImplementation("io.ktor:ktor-server-test-host-jvm")
+    testImplementation("io.ktor:ktor-server-tests-jvm:3.0.1")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:2.0.21")
 }
 
@@ -44,18 +39,5 @@ application {
 ktor {
     fatJar {
         archiveFileName.set("app.jar")
-    }
-
-    docker {
-        jreVersion.set(JavaVersion.VERSION_17)
-        localImageName.set("my-ktor-app")
-        imageTag.set("latest")
-        portMappings.set(listOf(
-            io.ktor.plugin.features.DockerPortMapping(
-                8080,
-                8080,
-                io.ktor.plugin.features.DockerPortMappingProtocol.TCP
-            )
-        ))
     }
 }

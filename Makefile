@@ -1,7 +1,5 @@
 # include ./my_server/.env
-# export
-
-# LOCAL_DUMP_PATH=_BACKUP/my_backup.sql
+export
 
 COMPOSE_BAKE=true
 
