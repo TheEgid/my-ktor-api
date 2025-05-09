@@ -34,7 +34,7 @@ fun Route.greetRoutes() {
         }
 
         get("/{name}") {
-            val name = validateName(call.parameters["name"] ?: "Guest")
+            val name = validateName(call.parameters["name"]!!)
             val lang = call.request.queryParameters["lang"] ?: "en"
             val details = call.request.queryParameters["details"]?.toBoolean() ?: false
 
