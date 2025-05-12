@@ -1,24 +1,22 @@
 package org.example
 
-import io.ktor.server.application.*
-
-import io.ktor.server.plugins.statuspages.*
 import io.ktor.http.*
+import io.ktor.server.application.*
+import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.response.*
-
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class ErrorResponse(
     val error: String,
-    val message: String?
+    val message: String?,
 )
 
-
 sealed class GreetingException(message: String) : RuntimeException(message)
-class InvalidNameException : GreetingException("Invalid name format. Only letters are allowed")
-class UnsupportedLanguageException(lang: String) : GreetingException("Unsupported language: $lang")
 
+class InvalidNameException : GreetingException("Invalid name format. Only letters are allowed")
+
+class UnsupportedLanguageException(lang: String) : GreetingException("Unsupported language: $lang")
 
 fun Application.configureStatusPages() {
     install(StatusPages) {
@@ -27,8 +25,8 @@ fun Application.configureStatusPages() {
                 HttpStatusCode.NotAcceptable,
                 ErrorResponse(
                     error = "Language not supported",
-                    message = cause.message
-                )
+                    message = cause.message,
+                ),
             )
         }
 
@@ -37,8 +35,8 @@ fun Application.configureStatusPages() {
                 HttpStatusCode.BadRequest,
                 ErrorResponse(
                     error = "Invalid name format",
-                    message = "Name should contain only letters"
-                )
+                    message = "Name should contain only letters",
+                ),
             )
         }
 
@@ -47,8 +45,8 @@ fun Application.configureStatusPages() {
                 HttpStatusCode.InternalServerError,
                 ErrorResponse(
                     error = "Internal server error",
-                    message = cause.message
-                )
+                    message = cause.message,
+                ),
             )
         }
     }

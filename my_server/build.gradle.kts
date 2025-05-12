@@ -1,18 +1,20 @@
 import io.ktor.plugin.features.*
 
-plugins {
-    kotlin("jvm") version "2.0.21"
-    id("io.ktor.plugin") version "3.0.1"
-    id("org.jetbrains.kotlin.plugin.serialization") version "2.0.21"
-}
 
 group = "org.example"
 version = "0.0.1"
 
+plugins {
+    kotlin("jvm") version "2.0.21"
+    id("io.ktor.plugin") version "3.0.1"
+    id("org.jetbrains.kotlin.plugin.serialization") version "2.0.21"
+
+    id("org.jlleitschuh.gradle.ktlint") version "12.2.0"
+}
+
 repositories {
     mavenCentral()
 }
-
 
 dependencies {
     implementation("io.ktor:ktor-server-core-jvm:3.0.1")

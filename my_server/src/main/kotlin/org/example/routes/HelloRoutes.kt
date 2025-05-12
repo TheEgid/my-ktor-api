@@ -9,7 +9,7 @@ import java.time.LocalDateTime
 @Serializable
 private data class HelloResponse(
     val hello: String,
-    val timestamp: String
+    val timestamp: String,
 )
 
 fun Route.helloRoutes() {
@@ -17,8 +17,8 @@ fun Route.helloRoutes() {
         call.respond(
             HelloResponse(
                 hello = "world",
-                timestamp = LocalDateTime.now().toString()
-            )
+                timestamp = LocalDateTime.now().toString(),
+            ),
         )
     }
 }

@@ -1,0 +1,25 @@
+# Корневая секция для всех файлов
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+indent_style = space
+indent_size = 4
+
+# Общие Kotlin-файлы и скрипты
+[*.{kt,kts}]
+ktlint_standard_no-wildcard-imports = disabled
+
+# При необходимости разрешить wildcard только для указанных пакетов
+ij_kotlin_packages_to_use_import_on_demand = java.util.*,io.ktor.**
+
+# Дополнительные правила KtLint (пример)
+# Максимальная длина строки
+max_line_length = 120
+
+# Пример исключений: отключить правила для сгенерированных файлов
+[**/build/**/*.kt]
+ktlint_no-wildcard-imports = disabled
+ktlint_standard_no-wildcard-imports = disabled
