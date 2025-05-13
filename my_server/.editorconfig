@@ -11,7 +11,7 @@ max_line_length = 120
 
 # Kotlin-файлы и скрипты
 [*.{kt,kts}]
-ktlint_standard_no-wildcard-imports = disabled
+# ktlint_standard_no-wildcard-imports = disabled
 ij_kotlin_packages_to_use_import_on_demand = java.util.*,io.ktor.**
 ktlint_import-ordering = idea
 ktlint_final-newline = true

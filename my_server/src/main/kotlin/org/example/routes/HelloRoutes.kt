@@ -1,8 +1,9 @@
 package org.example.routes
 
-import io.ktor.server.application.*
-import io.ktor.server.response.*
-import io.ktor.server.routing.*
+import io.ktor.server.application.call
+import io.ktor.server.response.respond
+import io.ktor.server.routing.Route
+import io.ktor.server.routing.get
 import kotlinx.serialization.Serializable
 import java.time.LocalDateTime
 
@@ -20,7 +21,9 @@ fun getHello(): HelloResponse {
 }
 
 fun Route.helloRoutes() {
+    val message: () -> HelloResponse = ::getHello
+
     get("hello") {
-        call.respond(getHello())
+        call.respond(message())
     }
 }

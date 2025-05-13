@@ -1,15 +1,17 @@
 package org.example
 
-import io.ktor.http.*
-import io.ktor.server.application.*
-import io.ktor.server.plugins.statuspages.*
-import io.ktor.server.response.*
+import io.ktor.http.HttpStatusCode
+import io.ktor.server.application.Application
+import io.ktor.server.application.install
+import io.ktor.server.plugins.statuspages.StatusPages
+import io.ktor.server.plugins.statuspages.exception
+import io.ktor.server.response.respond
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class ErrorResponse(
     val error: String,
-    val message: String?,
+    val message: String,
 )
 
 sealed class GreetingException(message: String) : RuntimeException(message)
@@ -25,7 +27,7 @@ fun Application.configureStatusPages() {
                 HttpStatusCode.NotAcceptable,
                 ErrorResponse(
                     error = "Language not supported",
-                    message = cause.message,
+                    message = cause.message ?: "Unknown language error",
                 ),
             )
         }
@@ -45,7 +47,7 @@ fun Application.configureStatusPages() {
                 HttpStatusCode.InternalServerError,
                 ErrorResponse(
                     error = "Internal server error",
-                    message = cause.message,
+                    message = cause.message ?: "Unknown error occurred",
                 ),
             )
         }
