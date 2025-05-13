@@ -7,18 +7,20 @@ import kotlinx.serialization.Serializable
 import java.time.LocalDateTime
 
 @Serializable
-private data class HelloResponse(
+data class HelloResponse(
     val hello: String,
     val timestamp: String,
 )
 
+fun getHello(): HelloResponse {
+    return HelloResponse(
+        hello = "Hello Kotlin",
+        timestamp = LocalDateTime.now().toString(),
+    )
+}
+
 fun Route.helloRoutes() {
     get("hello") {
-        call.respond(
-            HelloResponse(
-                hello = "world",
-                timestamp = LocalDateTime.now().toString(),
-            ),
-        )
+        call.respond(getHello())
     }
 }
