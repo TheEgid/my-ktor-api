@@ -1,5 +1,5 @@
 # ---------- Этап сборки ----------
-FROM gradle:8.4.0-jdk17-alpine AS build
+FROM 8.14.0-jdk17-alpine AS build
 
 WORKDIR /app
 

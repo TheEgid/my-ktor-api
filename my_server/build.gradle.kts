@@ -13,27 +13,31 @@ repositories {
 }
 
 dependencies {
-    implementation("io.ktor:ktor-server-core-jvm:2.3.12")
-    implementation("io.ktor:ktor-server-netty-jvm:2.3.12")
-    implementation("io.ktor:ktor-server-content-negotiation:2.3.12")
-    implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.12")
-    implementation("io.ktor:ktor-server-status-pages:2.3.12")
+    // Ktor
+    implementation("io.ktor:ktor-server-core-jvm:3.1.3")
+    implementation("io.ktor:ktor-server-netty-jvm:3.1.3")
+    implementation("io.ktor:ktor-server-content-negotiation:3.1.3")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:3.1.3")
+    implementation("io.ktor:ktor-server-status-pages:3.1.3")
+    implementation("io.ktor:ktor-server-cors:3.1.3")
+    implementation("io.ktor:ktor-server-default-headers:3.1.3")
+    implementation("io.ktor:ktor-server-forwarded-header:3.1.3")
+    implementation("io.ktor:ktor-server-call-logging:3.1.3")
 
-    implementation("io.ktor:ktor-server-cors:2.3.12")
-    implementation("io.ktor:ktor-server-default-headers:2.3.12")
-    implementation("io.ktor:ktor-server-forwarded-header:2.3.12")
-    implementation("io.ktor:ktor-server-call-logging:2.3.12")
-
+    // Kotlinx Serialization
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
 
+    // Koin
     implementation("io.insert-koin:koin-ktor:3.5.3")
     implementation("io.insert-koin:koin-logger-slf4j:3.5.3")
 
+    // Log4j
     implementation("org.apache.logging.log4j:log4j-api:2.24.3")
     implementation("org.apache.logging.log4j:log4j-core:2.24.3")
     implementation("org.apache.logging.log4j:log4j-slf4j2-impl:2.24.3")
 
-    testImplementation("io.ktor:ktor-server-tests:2.3.12")
+    // Testing
+    testImplementation("io.ktor:ktor-server-tests:3.1.3")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:2.1.21")
 }
 
